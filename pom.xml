@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.ashlux.twitarr</groupId>
+  <artifactId>twitarr-pom</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <name>Twitarr POM</name>
+  <packaging>pom</packaging>
+
+  <prerequisites>
+    <maven>2.0.9</maven>
+  </prerequisites>
+
+  <scm>
+    <url>http://github.com/ashlux/potbs4j/tree/master</url>
+    <connection>scm:git:git://github.com/ashlux/potbs4j.git</connection>
+  </scm>
+
+  <modules>
+    <module>twitarr-service</module>
+  </modules>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.9</version>
+      </extension>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+        <version>1.0-alpha-6</version>
+      </extension>
+    </extensions>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <target>1.6</target>
+          <source>1.6</source>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.1</version>
+          </dependency>
+          <!-- Dependency to fix release plugin with git from failing with this exception:
+        java.lang.NoClassDefFoundError: org/codehaus/plexus/util/xml/XmlStreamReader -->
+          <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>1.5.8</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <version>1.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-git-commons</artifactId>
+            <version>1.1</version>
+          </dependency>
+          <!-- Dependency to fix release plugin with git from failing with this exception:
+        java.lang.NoClassDefFoundError: org/codehaus/plexus/util/xml/XmlStreamReader -->
+          <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>1.5.8</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>5.8</version>
+      <classifier>jdk15</classifier>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>ashlux-repository</id>
+      <url>http://www.ashlux.com/maven2/repo</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>ashlux-snapshot-repository</id>
+      <url>http://www.ashlux.com/maven2/snapshotRepo</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>ashlux-ftp-repository</id>
+      <url>ftp://www.ashlux.com/www/www/maven2/repo</url>
+    </repository>
+    <snapshotRepository>
+      <id>ashlux-ftp-snapshotrepo</id>
+      <url>ftp://www.ashlux.com/www/www/maven2/snapshotRepo</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+</project>
