@@ -14,12 +14,13 @@
   </prerequisites>
 
   <scm>
-    <url>http://github.com/ashlux/potbs4j/tree/master</url>
-    <connection>scm:git:git://github.com/ashlux/potbs4j.git</connection>
+    <url>http://github.com/ashlux/twitarr/tree/master</url>
+    <connection>scm:git:git://github.com/ashlux/twitarr.git</connection>
   </scm>
 
   <modules>
     <module>twitarr-service</module>
+    <module>twitarr-web</module>
   </modules>
 
   <build>

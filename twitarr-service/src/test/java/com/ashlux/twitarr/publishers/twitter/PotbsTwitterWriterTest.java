@@ -1,8 +1,8 @@
-package com.ashlux.twitarr.writer.twitter;
+package com.ashlux.twitarr.publishers.twitter;
 
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
-import com.ashlux.twitarr.writer.TwitarrWriterException;
+import com.ashlux.twitarr.exception.TwitarrWriterException;
 import com.ashlux.potbs4j.vo.ServerDocument;
 import com.ashlux.potbs4j.vo.ServerName;
 import com.ashlux.potbs4j.vo.ServerStatus;
@@ -17,7 +17,7 @@ public class PotbsTwitterWriterTest
         server.setName( ServerName.ANTIGUA );
         server.setStatus( ServerStatus.OFFLINE );
 
-        PotbsTwitterWriterStub potbsTwitterWriterStub = new PotbsTwitterWriterStub( "id", "password" );
+        TwitterPublisherStub potbsTwitterWriterStub = new TwitterPublisherStub( "id", "password" );
         potbsTwitterWriterStub.publishServerStatusChange( server );
 
         assertEquals( potbsTwitterWriterStub.publishedStatus, "Server #antigua has gone OFFLINE. #potbs" );
@@ -31,7 +31,7 @@ public class PotbsTwitterWriterTest
         server.setName( ServerName.ANTIGUA );
         server.setStatus( ServerStatus.ONLINE );
 
-        PotbsTwitterWriterStub potbsTwitterWriterStub = new PotbsTwitterWriterStub( "id", "password" );
+        TwitterPublisherStub potbsTwitterWriterStub = new TwitterPublisherStub( "id", "password" );
         potbsTwitterWriterStub.publishServerStatusChange( server );
 
         assertEquals( potbsTwitterWriterStub.publishedStatus, "Server #antigua is back ONLINE. #potbs" );
@@ -45,7 +45,7 @@ public class PotbsTwitterWriterTest
         server.setName( ServerName.ANTIGUA );
         server.setStatus( ServerStatus.LOCKED );
 
-        PotbsTwitterWriterStub potbsTwitterWriterStub = new PotbsTwitterWriterStub( "id", "password" );
+        TwitterPublisherStub potbsTwitterWriterStub = new TwitterPublisherStub( "id", "password" );
         potbsTwitterWriterStub.publishServerStatusChange( server );
 
         assertEquals( potbsTwitterWriterStub.publishedStatus, "Server #antigua is now LOCKED. #potbs" );
@@ -59,18 +59,18 @@ public class PotbsTwitterWriterTest
         server.setName( ServerName.ANTIGUA );
         server.setStatus( null );
 
-        PotbsTwitterWriterStub potbsTwitterWriterStub = new PotbsTwitterWriterStub( "id", "password" );
+        TwitterPublisherStub potbsTwitterWriterStub = new TwitterPublisherStub( "id", "password" );
         potbsTwitterWriterStub.publishServerStatusChange( server );
 
         assertEquals( potbsTwitterWriterStub.publishedStatus, "Server #antigua is back ONLINE. #potbs" );
     }
 
-    public class PotbsTwitterWriterStub
-        extends PotbsTwitterWriter
+    public class TwitterPublisherStub
+        extends TwitterPublisher
     {
         public String publishedStatus = null;
 
-        public PotbsTwitterWriterStub( String id, String password )
+        public TwitterPublisherStub( String id, String password )
         {
             super( id, password );
         }

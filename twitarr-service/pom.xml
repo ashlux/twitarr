@@ -23,6 +23,14 @@
       <classifier>jdk15</classifier>
       <scope>test</scope>
     </dependency>
+    <!-- SL4J binding for tests only -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.5.5</version>
+      <scope>test</scope>
+    </dependency>
+    
     <dependency>
       <groupId>net.homeip.yusuke</groupId>
       <artifactId>twitter4j</artifactId>
@@ -32,9 +40,21 @@
     <dependency>
       <groupId>com.ashlux.potbs</groupId>
       <artifactId>potbs4j</artifactId>
-      <version>0.1</version>
+      <version>0.3</version>
       <scope>compile</scope>
     </dependency>
-  </dependencies>  
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.5.5</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 
 </project>

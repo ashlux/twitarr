@@ -1,0 +1,7 @@
+<cronentries>
+  <cron>
+    <url>/cron/ServerStatusMonitorServlet</url>
+    <description>Monitor server status.</description>
+    <schedule>every 1 minutes</schedule>
+  </cron>
+</cronentries>
