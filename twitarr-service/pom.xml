@@ -40,7 +40,7 @@
     <dependency>
       <groupId>com.ashlux.potbs</groupId>
       <artifactId>potbs4j</artifactId>
-      <version>0.3</version>
+      <version>0.4-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
