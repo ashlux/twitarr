@@ -9,10 +9,18 @@
     <servlet-name>serverStatusMonitor</servlet-name>
     <servlet-class>com.ashlux.twitarr.cron.ServerStatusMonitorServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>twitterStatusChangeServlet</servlet-name>
+    <servlet-class>com.ashlux.twitarr.twitter.TwitterStatusChangeServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>serverStatusMonitor</servlet-name>
     <url-pattern>/cron/ServerStatusMonitorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>twitterStatusChangeServlet</servlet-name>
+    <url-pattern>/TwitterStatusChangeServlet</url-pattern>
   </servlet-mapping>
 
   <!-- Prevent unauthorized users from running cron jobs -->
