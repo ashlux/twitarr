@@ -10,8 +10,8 @@
     <servlet-class>com.ashlux.twitarr.cron.ServerStatusMonitorServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>twitterStatusChangeServlet</servlet-name>
-    <servlet-class>com.ashlux.twitarr.twitter.TwitterStatusChangeServlet</servlet-class>
+    <servlet-name>portStatusMonitor</servlet-name>
+    <servlet-class>com.ashlux.twitarr.cron.PortStateMonitorServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -19,10 +19,11 @@
     <url-pattern>/cron/ServerStatusMonitorServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>twitterStatusChangeServlet</servlet-name>
-    <url-pattern>/TwitterStatusChangeServlet</url-pattern>
+    <servlet-name>portStatusMonitor</servlet-name>
+    <url-pattern>/cron/PortStateMonitorServlet</url-pattern>
   </servlet-mapping>
 
+  <!-- Security doesn't seem to work correctly atm -->
   <!-- Prevent unauthorized users from running cron jobs -->
   <!--<security-constraint>-->
     <!--<web-resource-collection>-->

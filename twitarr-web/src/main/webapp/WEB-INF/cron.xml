@@ -4,4 +4,10 @@
     <description>Monitor server status.</description>
     <schedule>every 1 minutes</schedule>
   </cron>
+
+  <cron>
+    <url>/cron/PortStateMonitorServlet</url>
+    <description>Monitor port state.</description>
+    <schedule>every 10 minutes</schedule>
+  </cron>
 </cronentries>

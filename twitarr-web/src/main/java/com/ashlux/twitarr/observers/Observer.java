@@ -1,4 +1,4 @@
-package com.ashlux.twitarr.observer;
+package com.ashlux.twitarr.observers;
 
 import com.ashlux.twitarr.exception.TwitarrException;
 

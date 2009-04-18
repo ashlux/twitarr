@@ -1,4 +1,4 @@
-package com.ashlux.twitarr.observer.observers;
+package com.ashlux.twitarr.observers;
 
 import com.ashlux.potbs.potbs4j.exception.PotbsServiceException;
 import com.ashlux.potbs.potbs4j.services.server.ServerStatusService;
@@ -8,7 +8,6 @@ import com.ashlux.potbs4j.vo.ServerName;
 import com.ashlux.potbs4j.vo.ServerStatus;
 import com.ashlux.twitarr.exception.TwitarrException;
 import com.ashlux.twitarr.exception.TwitarrWriterException;
-import com.ashlux.twitarr.observer.AbstractObserver;
 import org.apache.xmlbeans.XmlObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,38 +31,42 @@ public class ServerStatusChangeObserver
     private ServerStatusService serverStatusService;
 
     @Override
-    public XmlObject doObservation( XmlObject previousXmlObject )
+    public void doObservation( XmlObject nextXmlObject, XmlObject previousXmlObject )
+        throws TwitarrException
+    {
+        ServerListDocument currentServerListDocument = (ServerListDocument) nextXmlObject;
+        ServerListDocument previousServerListDocument = (ServerListDocument) previousXmlObject;
+
+        // nothing to compare, so can't determine server status changes
+        if ( previousServerListDocument == null )
+        {
+            log.trace( "No previous server list found, so no notifications will be sent out." );
+            return;
+        }
+
+        // if too much time since last update, do not bother publishing server statuses
+        if ( tooMuchTimeSinceLastUpdate( currentServerListDocument.getServerList().getUpdated(),
+                                         previousServerListDocument.getServerList().getUpdated() ) )
+        {
+            log.trace( "Too much time since checked for server status change, so no notfications will be sent out." );
+            return;
+        }
+
+        // look for status changes and publish them
+        publishServerStatusChanges( currentServerListDocument, previousServerListDocument );
+    }
+
+    @Override
+    public XmlObject getNextObservation()
         throws TwitarrException
     {
         try
         {
-            ServerListDocument currentServerListDocument = serverStatusService.getAllServerStatuses();
-            ServerListDocument previousServerListDocument = (ServerListDocument) previousXmlObject;
-
-            // nothing to compare, so can't determine server status changes
-            if ( previousServerListDocument == null )
-            {
-                log.trace( "No previous server list found, so no notifications will be sent out." );
-                return currentServerListDocument;
-            }
-
-            // if too much time since last update, do not bother publishing server statuses
-            if ( tooMuchTimeSinceLastUpdate( currentServerListDocument.getServerList().getUpdated(),
-                                             previousServerListDocument.getServerList().getUpdated() ) )
-            {
-                log.trace(
-                    "Too much time since checked for server status change, so no notfications will be sent out." );
-                return currentServerListDocument;
-            }
-
-            // look for status changes and publish them
-            publishServerStatusChanges( currentServerListDocument, previousServerListDocument );
-
-            return currentServerListDocument;
+            return serverStatusService.getAllServerStatuses();
         }
         catch ( PotbsServiceException e )
         {
-            throw new TwitarrException( "Error getting current server statuses.", e );
+            throw new TwitarrException( e );
         }
     }
 

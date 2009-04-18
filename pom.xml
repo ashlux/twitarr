@@ -19,7 +19,6 @@
   </scm>
 
   <modules>
-    <module>twitarr-service</module>
     <module>twitarr-web</module>
   </modules>
 
